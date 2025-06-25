@@ -8,11 +8,19 @@
         <version>3.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+<<<<<<< HEAD
     <groupId>com.proj</groupId>
     <artifactId>proj</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>proj</name>
     <description>proj</description>
+=======
+    <groupId>com.practice2</groupId>
+    <artifactId>FIGHTMARO</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>FIGHTMARO</name>
+    <description>FIGHTMARO</description>
+>>>>>>> 27e73c6 (implemented secuity)
     <url/>
     <licenses>
         <license/>
@@ -36,6 +44,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
+<<<<<<< HEAD
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
@@ -66,6 +75,14 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
             <version>0.11.5</version>
+=======
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version> <!-- Latest stable as of 2024 -->
+>>>>>>> 27e73c6 (implemented secuity)
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
@@ -75,22 +92,59 @@
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
+<<<<<<< HEAD
             <artifactId>jjwt-jackson</artifactId>
+=======
+            <artifactId>jjwt-jackson</artifactId> <!-- for JSON processing -->
+>>>>>>> 27e73c6 (implemented secuity)
             <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
 
+<<<<<<< HEAD
+=======
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>3.2.0</version> <!-- You can use the latest version -->
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.1.Final</version> <!-- or latest -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version> <!-- latest as of 2025 -->
+            <scope>provided</scope>
+        </dependency>
+>>>>>>> 27e73c6 (implemented secuity)
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+<<<<<<< HEAD
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+=======
+>>>>>>> 27e73c6 (implemented secuity)
     </dependencies>
 
     <build>
@@ -107,7 +161,10 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 27e73c6 (implemented secuity)
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
