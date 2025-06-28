@@ -1,8 +1,11 @@
 package com.practice2.fightmaro.Controllers;
 
 import com.practice2.fightmaro.Config.JwtTokenHelper;
+import com.practice2.fightmaro.Entities.User;
 import com.practice2.fightmaro.Payloads.LoginRequest;
 import com.practice2.fightmaro.Payloads.LoginResponse;
+import com.practice2.fightmaro.Payloads.UserDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -13,21 +16,20 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/auth")
 public class Logincontroller {
 
+    @Autowired
+    private ModelMapper  modelMapper;
         @Autowired
         private JwtTokenHelper jwtUtils;
 
@@ -52,10 +54,13 @@ public class Logincontroller {
 
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
+
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            User user = (User) authentication.getPrincipal();
+            UserDto userDto = modelMapper.map(user, UserDto.class);
             String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
 
-            LoginResponse response = new LoginResponse(userDetails.getUsername(), jwtToken);
+            LoginResponse response = new LoginResponse(userDto, jwtToken);
             return ResponseEntity.ok(response);
         }
     }

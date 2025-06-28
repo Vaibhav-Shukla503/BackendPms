@@ -13,7 +13,7 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
+    private String price;
     private String type;
     private String address;
     private Integer bedrooms;

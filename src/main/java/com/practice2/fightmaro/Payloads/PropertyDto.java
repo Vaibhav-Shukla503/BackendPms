@@ -8,6 +8,7 @@ public class PropertyDto {
 
     private int id;
     private String type;
+    private String price;
     private String address;
     private Integer bedrooms;
     private Integer bathrooms;

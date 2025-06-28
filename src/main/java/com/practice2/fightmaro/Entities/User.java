@@ -20,6 +20,12 @@ public class User implements UserDetails {
     private String name;
     private String email;
     private String password;
+    private String mobno;
+    private String address;
+    @Lob
+    @Column(name = "image", columnDefinition = "LONGBLOB")
+    private byte[] image;
+
     @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Property> properties=new ArrayList<>();

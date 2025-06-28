@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class LoginResponse {
-    String username;
+    UserDto userDto;
     String jwtToken;
 
-    public LoginResponse(String username, String jwtToken) {
-        this.username = username;
+    public LoginResponse(UserDto user, String jwtToken) {
+        this.userDto = user;
         this.jwtToken = jwtToken;
     }
 }
