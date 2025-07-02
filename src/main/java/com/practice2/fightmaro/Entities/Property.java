@@ -1,8 +1,13 @@
 package com.practice2.fightmaro.Entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 
@@ -24,5 +29,8 @@ public class Property {
     @JoinColumn(name="propertyowner")
    @JsonManagedReference
     private User owner;
+   @OneToMany(mappedBy = "property")
+   @JsonIgnore
+    private List<Booking> bookings=new ArrayList<>();
 
 }

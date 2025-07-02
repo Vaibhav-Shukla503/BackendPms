@@ -1,5 +1,6 @@
 package com.practice2.fightmaro.Controllers;
 
+import com.practice2.fightmaro.Config.CustomUserDetails;
 import com.practice2.fightmaro.Config.JwtTokenHelper;
 import com.practice2.fightmaro.Entities.User;
 import com.practice2.fightmaro.Payloads.LoginRequest;
@@ -55,8 +56,9 @@ public class Logincontroller {
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
 
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            User user = (User) authentication.getPrincipal();
+            CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+            User user = userDetails.getUser();
+
             UserDto userDto = modelMapper.map(user, UserDto.class);
             String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
 

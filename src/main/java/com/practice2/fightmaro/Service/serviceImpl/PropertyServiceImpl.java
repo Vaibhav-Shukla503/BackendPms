@@ -39,6 +39,7 @@ public class PropertyServiceImpl implements PropertyService {
         property.setType(propertyDto.getType());
         property.setBedrooms(propertyDto.getBedrooms());
         property.setPrice(propertyDto.getPrice());
+
         property.setBathrooms(propertyDto.getBathrooms());
         Property updatedProp=this.propertyRepo.save(property);
         return this.modelMapper.map(updatedProp,PropertyDto.class);

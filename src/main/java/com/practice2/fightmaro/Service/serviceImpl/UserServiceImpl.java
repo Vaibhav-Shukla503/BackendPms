@@ -1,6 +1,5 @@
 package com.practice2.fightmaro.Service.serviceImpl;
 
-import aj.org.objectweb.asm.commons.Remapper;
 import com.practice2.fightmaro.Entities.User;
 import com.practice2.fightmaro.Payloads.UserDto;
 import com.practice2.fightmaro.Repositories.UserRepo;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,10 +21,13 @@ public class UserServiceImpl implements UserService {
 @Autowired
     private ModelMapper modelMapper;
 
+
+
     @Override
    public  UserDto createUser(UserDto userDto)
     {
          User user=this.dtoToUser(userDto);
+         user.setRole(userDto.getRole());
                  User savedUser=this.userRepo.save(user);
          return this.userToUserdto(savedUser);
     }
@@ -41,6 +42,7 @@ public class UserServiceImpl implements UserService {
         user.setEmail(userdto.getEmail());
         user.setMobno(userdto.getMobno());
         user.setAddress(userdto.getAddress());
+
         User Updated=userRepo.save(user);
         return this.userToUserdto(Updated);
     }

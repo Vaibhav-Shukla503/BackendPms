@@ -7,51 +7,47 @@ import com.practice2.fightmaro.Payloads.BookingDto;
 import com.practice2.fightmaro.Repositories.BookingRepo;
 import com.practice2.fightmaro.Repositories.PropertyRepo;
 import com.practice2.fightmaro.Repositories.UserRepo;
+import com.practice2.fightmaro.Service.serviceImpl.BokingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/booking/api")
 public class BookingController {
 
-    @Autowired
-    BookingRepo bookingRepo;
-    @Autowired
-    UserRepo userRepo;
-    @Autowired
-    PropertyRepo propertyRepo;
-    @PostMapping("/api/bookings")
-    public ResponseEntity<?> createBooking(@RequestBody BookingDto dto) {
-        // Validate buyer
-        User buyer = userRepo.findById(dto.getBuyerId())
-                .orElseThrow(() -> new RuntimeException("Buyer not found with ID: " + dto.getBuyerId()));
+    @Autowired private BokingService bookingService;
 
-        // Validate property
-        Property property = propertyRepo.findById(dto.getPropertyId())
-                .orElseThrow(() -> new RuntimeException("Property not found with ID: " + dto.getPropertyId()));
-
-        User seller = property.getOwner();
-
-        Booking booking = new Booking();
-        booking.setBuyer(buyer);
-        booking.setProperty(property);
-        booking.setSeller(seller);
-        booking.setRequestDate(LocalDateTime.now());
-
-        bookingRepo.save(booking);
-        return ResponseEntity.ok("Booking requested!");
+    @GetMapping("/test")
+    public ResponseEntity<String> testAuth() {
+        return ResponseEntity.ok("Token is working, you're authenticated!");
     }
 
-    @PutMapping("/bookings/{id}/status")
-    public ResponseEntity<?> updateStatus(@PathVariable int  id, @RequestParam String status) {
-        Booking booking = bookingRepo.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
-        booking.setStatus(status);
-        bookingRepo.save(booking);
-        return ResponseEntity.ok("Status updated");
+    @PostMapping("/bookings")
+    public ResponseEntity<Booking> createBooking(
+            @RequestParam int propertyId,
+            @RequestParam int buyerId) {
+        Booking booking = bookingService.createBooking(propertyId, buyerId);
+        return ResponseEntity.ok(booking);
     }
 
+    @GetMapping("/seller/{sellerId}")
+    public ResponseEntity<List<BookingDto>> getBookingsBySeller(@PathVariable int sellerId) {
+        return ResponseEntity.ok(bookingService.getBookingsBySeller(sellerId));
+    }
 
+    @GetMapping("/buyer/{buyerId}")
+    public ResponseEntity<List<BookingDto>> getBookingsByBuyer(@PathVariable int buyerId) {
+        return ResponseEntity.ok(bookingService.getBookingsByBuyer(buyerId));
+    }
+    @PutMapping("/{id}/confirm")
+    public ResponseEntity<?> confirmBooking(@PathVariable int  id) {
+        Booking updatedBooking = bookingService.confirmBooking(id);
+        return ResponseEntity.ok("Your booking is confirmed");
+    }
 }

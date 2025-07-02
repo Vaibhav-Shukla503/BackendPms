@@ -13,5 +13,5 @@ public class PropertyDto {
     private Integer bedrooms;
     private Integer bathrooms;
     private Double area;
-     private UserDto owner;
+//     private UserDto owner;
 }

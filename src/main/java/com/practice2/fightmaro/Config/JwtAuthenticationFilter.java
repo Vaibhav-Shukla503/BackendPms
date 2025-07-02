@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String jwt = parseJwt(request);
             if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
                 String username = jwtUtils.getUserNameFromJwtToken(jwt);
-
+                System.out.println("✅ JWT valid, extracted username: " + username);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication =
@@ -54,7 +54,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
                 // ✅ Set user as authenticated in the security context
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
+                System.out.println("✅ SecurityContext set with authenticated user.");
 
             }
         } catch (Exception e) {

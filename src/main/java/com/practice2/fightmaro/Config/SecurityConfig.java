@@ -25,13 +25,13 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthFilter;
 
-    // ✅ Configure HTTP security
+    //  Configure HTTP security
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/signin","/api/users/**","/api/user/**","/api/**","/booking/api/userdetail/**","/api/bookings/**","/chat/**","/chat").permitAll()
+                        .requestMatchers("/api/auth/signin","/error","/api/users/**","/api/user/**","/api/**","/chat/**","/chat").permitAll()
                         // public login/signup
                         .anyRequest().authenticated()
                 )
@@ -42,7 +42,7 @@ public class SecurityConfig {
         return http.build();
     }
 
-    // ✅ Provide DAO-based auth with UserDetailsService
+    //  Provide DAO-based auth with UserDetailsService
     @Bean
     public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
@@ -51,13 +51,13 @@ public class SecurityConfig {
         return provider;
     }
 
-    // ✅ Declare AuthenticationManager via config
+    //  Declare AuthenticationManager via config
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // ✅ Password encoder (NoOp for testing only)
+    // Password encoder (NoOp for testing only)
     @Bean
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
