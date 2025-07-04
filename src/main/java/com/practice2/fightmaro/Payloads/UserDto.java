@@ -18,20 +18,20 @@ import java.util.Set;
 public class UserDto {
 
     private int id;
-    @NotBlank
+
     private String name;
     @Email
     private String email;
-    @NotBlank
+
     @Size(min=6)
     private String password;
-    @NotBlank
+
     private String mobno;
 
-    @NotBlank
+
     private String address;
     private byte[] image;
     private Roleh role;
     private Set<Role> roles;
-    private List<Booking> bookings=new ArrayList<>();
+
 }
